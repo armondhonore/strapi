@@ -1,0 +1,35 @@
+application:
+  name: strapi-cms
+  pods:
+    - name: strapi
+      image: strapi/strapi:latest
+      path: /
+      servicePorts:
+        - 1337
+      vars:
+        DATABASE_CLIENT: postgres
+        DATABASE_HOST: postgres.pod
+        DATABASE_PORT: "5432"
+        DATABASE_NAME: strapi
+        DATABASE_USERNAME: strapi
+        DATABASE_PASSWORD: strapi
+        JWT_SECRET: "jwt-secret-changeme"
+        APP_KEYS: "key1-changeme,key2-changeme"
+        API_TOKEN_SALT: "api-salt-changeme"
+        ADMIN_JWT_SECRET: "admin-jwt-changeme"
+      volumes:
+        - name: uploads
+          mountPath: /app/public/uploads
+          size: 5Gi
+    - name: postgres
+      image: postgres:16
+      servicePorts:
+        - 5432
+      vars:
+        POSTGRES_DB: strapi
+        POSTGRES_USER: strapi
+        POSTGRES_PASSWORD: strapi
+      volumes:
+        - name: db
+          mountPath: /var/lib/postgresql
+          size: 5Gi
