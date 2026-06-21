@@ -1,7 +1,7 @@
 application:
   name: strapi-cms
   pods:
-  - name: strapi
+  - name: app
     image: strapi/strapi:latest
     path: /
     servicePorts:
@@ -13,11 +13,15 @@ application:
       DATABASE_NAME: strapi
       DATABASE_USERNAME: strapi
       DATABASE_PASSWORD: strapi
-      JWT_SECRET: "jwt-secret-changeme"
-      APP_KEYS: "key1-changeme,key2-changeme"
-      API_TOKEN_SALT: "api-salt-changeme"
-      ADMIN_JWT_SECRET: "admin-jwt-changeme"
+      JWT_SECRET: "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+      APP_KEYS: "tobemodified1,tobemodified2,tobemodified3,tobemodified4"
+      API_TOKEN_SALT: "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+      ADMIN_JWT_SECRET: "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+      NODE_ENV: production
     volumes:
+    - name: strapi-cms-app
+      mountPath: /srv/app
+      size: 5Gi
     - name: strapi-cms-uploads
       mountPath: /app/public/uploads
       size: 5Gi
