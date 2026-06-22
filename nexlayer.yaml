@@ -2,7 +2,7 @@ application:
   name: strapi-cms
   pods:
   - name: app
-    image: strapi/strapi:latest
+    image: "# filled by pipeline"
     path: /
     servicePorts:
     - 1337
